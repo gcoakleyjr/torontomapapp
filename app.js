@@ -98,7 +98,10 @@ app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
 }));
 
 app.delete("/campgrounds/:id/reviews/:reviewId", catchAsync(async (req, res) => {
-
+    const { id, reviewId } = req.params
+    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } }) // even though we delete the review from the review database, there is still a reference to it here. this $pull removes items from an array that match a property (we use update not delete cause we are just updating the array)
+    await Review.findByIdAndDelete(reviewId) //this removes it from the review databose
+    res.redirect(`/campgrounds/${id}`)
 }))
 
 app.all('*', (req, res, next) => {
