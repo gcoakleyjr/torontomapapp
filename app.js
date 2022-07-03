@@ -8,10 +8,14 @@ const ExpressError = require("./utils/ExpressError"); //our custom error handle 
 const sessions = require("express-session") //saves information to the server side for use when revisting webpages. Cookies are client side and limited
 const { privateDecrypt } = require("crypto");
 const flash = require("connect-flash") // used for flashing messages
+const passport = require("passport") //use for user login stuff install passport$0.5.0 for now, or else redirect wont work
+const localStrategy = require("passport-local")
+const User = require("./models/user") //our user login schema
 
 // routes
 const campgrounds = require("./routes/campgrounds")
 const reviews = require("./routes/reviews")
+const users = require("./routes/users")
 
 
 //connect mongoose
@@ -43,17 +47,25 @@ const sessionConfig = { //how you set up sessions, just do it
 }
 app.use(sessions(sessionConfig))
 app.use(flash()) // need sessions installed
+
+app.use(passport.initialize()) //required to intialize passport
+app.use(passport.session()) //used for persistent login sessions (make sure this is after app.use(sessions))
+passport.use(new localStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser()) //how you get user into the sessions
+passport.deserializeUser(User.deserializeUser()) //how you get users out. methods on the passport plugin
+
 app.use((req, res, next) => { //do this for flash to work on every template and no need to pass through as data 
+    res.locals.currentUser = req.user  //this isnt flash, its passport, helps us pass info on the user on each request without having to do it manually. used for if user is logged in or not
     res.locals.success = req.flash("success")
     res.locals.error = req.flash("error")
     next()
 })
 
 
-
 //define campground route
 app.use("/campgrounds", campgrounds)
 app.use("/campground/:id/reviews", reviews)
+app.use("/", users)
 
 
 //CRUD
@@ -61,6 +73,9 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
+app.get("/currentuser", (req, res) => {
+    res.send(req.user)
+})
 
 //Error handling
 app.all('*', (req, res, next) => {

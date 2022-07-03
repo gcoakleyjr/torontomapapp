@@ -8,6 +8,10 @@ const CampgroundSchema = new Schema({
     price: Number,
     description: String,
     location: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: "User"  //ref refers to the model. so we have user, review and campground model. when we supply an Object ID, it refers to that model and then we we populate it, we get the actual data
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,

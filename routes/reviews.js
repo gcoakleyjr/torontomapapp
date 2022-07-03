@@ -3,21 +3,10 @@ const router = express.Router({ mergeParams: true }); //need merge params here b
 
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
-
-const { reviewSchema } = require('../schemas.js');
 const Review = require("../models/review");
 const Campground = require('../models/campground');
+const { isLoggedIn, isAuthor, validateReview } = require("../middleware.js")
 
-
-const validateReview = (req, res, next) => {  //put this in front of our route function to validate the forms we are submitting
-    const { error } = reviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',')
-        throw new ExpressError(msg, 400)
-    } else {
-        next();
-    }
-}
 
 router.post("/", validateReview, catchAsync(async (req, res, next) => {
     const review = new Review(req.body.review)
