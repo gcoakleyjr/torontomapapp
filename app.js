@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== "production") { //in development mode, take env into file, in production, we do something else
+    require('dotenv').config();
+}
+
 const mongoose = require("mongoose")
 const express = require('express');
 const app = express();
@@ -6,11 +10,11 @@ const methodOverride = require("method-override") //allows you to send put and d
 const engine = require("ejs-mate") //allows you to do layout
 const ExpressError = require("./utils/ExpressError"); //our custom error handle class for throwing errors with custom message and status code
 const sessions = require("express-session") //saves information to the server side for use when revisting webpages. Cookies are client side and limited
-const { privateDecrypt } = require("crypto");
 const flash = require("connect-flash") // used for flashing messages
 const passport = require("passport") //use for user login stuff install passport$0.5.0 for now, or else redirect wont work
 const localStrategy = require("passport-local")
 const User = require("./models/user") //our user login schema
+
 
 // routes
 const campgrounds = require("./routes/campgrounds")
@@ -64,7 +68,7 @@ app.use((req, res, next) => { //do this for flash to work on every template and 
 
 //define campground route
 app.use("/campgrounds", campgrounds)
-app.use("/campground/:id/reviews", reviews)
+app.use("/campgrounds/:id/reviews", reviews)
 app.use("/", users)
 
 
@@ -73,9 +77,6 @@ app.get('/', (req, res) => {
     res.render('home')
 });
 
-app.get("/currentuser", (req, res) => {
-    res.send(req.user)
-})
 
 //Error handling
 app.all('*', (req, res, next) => {
