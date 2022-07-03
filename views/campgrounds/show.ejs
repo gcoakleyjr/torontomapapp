@@ -3,8 +3,42 @@
 
     <div class="row">
         <div class="col-6">
+            <!-- Carousel -->
+            <div id="mapAppIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+
+                    <% campground.images.forEach((img, i)=> { %>
+                        <button type="button" data-bs-target="#mapAppIndicators" data-bs-slide-to="<%= i %>"
+                            class="<%= i === 0 ? " active" : "" %>" aria-label="Slide <%= i + 1 %>"></button>
+                        <% }) %>
+
+                </div>
+                <div class="carousel-inner">
+
+                    <% campground.images.forEach((img, i)=> { %>
+                        <div class="carousel-item <%= i === 0 ? " active" : "" %>">
+                            <img src="<%= img.url %>" class="d-block w-100" alt="">
+                        </div>
+                        <% }) %>
+
+                </div>
+
+                <% if(campground.images.length> 1) {%>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#mapAppIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#mapAppIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    <% } %>
+            </div>
+
+            <!-- DESCRIPTION -->
             <div class="card mb-3">
-                <img src="<%= campground.image%>" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title mb-0">
                         <%= campground.title%>
@@ -36,9 +70,14 @@
                             2 days ago
                         </div>
             </div>
-
         </div>
+
+        <!-- REVIEWS -->
         <div class="col-6">
+
+            <!-- MAP -->
+            <div id='map' style='width: 636px; height: 200px;' class="mb-3"></div>
+
             <% if (currentUser) { %>
                 <h2>Leave a Review</h2>
                 <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form"
@@ -77,6 +116,8 @@
                 </form>
                 <% } %>
 
+
+            <!-- REVIEW COMMENTS -->
                     <% for(let review of campground.reviews) { %>
                         <div class="card mb-3 ">
                             <div class="card-body">
@@ -101,3 +142,8 @@
                         <% } %>
         </div>
     </div>
+
+    <script>
+        const campLocation = <%- JSON.stringify(campground.geometry.coordinates) %>
+    </script>
+    <script src="/javascript/showPageMap.js"></script>

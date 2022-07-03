@@ -2,7 +2,7 @@
     <div class="row">
         <h1 class="text-center">New Campground</h1>
         <div class="col-6 offset-3">
-            <form action="/campgrounds" method="POST" novalidate class="validated-form" entype="multipart/form-data">
+            <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
                 <!--enctype is for different encoding, help with images -->
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
@@ -12,7 +12,6 @@
                     <label class="form-label" for="location">Location</label>
                     <input class="form-control" type="text" id="location" name="campground[location]" required>
                 </div>
-                <input type="file" name="image" id="" multiple>
                 <!-- <div class="mb-3">
                     <label class="form-label" for="image">Image Url</label>
                     <input class="form-control" type="text" id="image" name="campground[image]" required>
@@ -31,6 +30,12 @@
                     <textarea class="form-control" type="text" id="description" name="campground[description]"
                         required></textarea>
                 </div>
+
+                <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label">Add image(s)...</label>
+                    <input class="form-control" type="file" id="formFileMultiple" multiple name="image">
+                </div>
+
                 <div class="mb-3">
                     <button class="btn btn-success">Add Campground</button>
                 </div>
