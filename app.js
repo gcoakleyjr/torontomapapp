@@ -14,12 +14,16 @@ const flash = require("connect-flash") // used for flashing messages
 const passport = require("passport") //use for user login stuff install passport$0.5.0 for now, or else redirect wont work
 const localStrategy = require("passport-local")
 const User = require("./models/user") //our user login schema
+const mongoSanitize = require("express-mongo-sanitize") //makes sure someone doesnt try to pass bad querys
+//const helmet = require("helmet") //security
+
 
 
 // routes
 const campgrounds = require("./routes/campgrounds")
 const reviews = require("./routes/reviews")
-const users = require("./routes/users")
+const users = require("./routes/users");
+const ExpressMongoSanitize = require('express-mongo-sanitize');
 
 
 //connect mongoose
@@ -38,13 +42,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.engine("ejs", engine)
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(mongoSanitize())
+//app.use(helmet)
 
 const sessionConfig = { //how you set up sessions, just do it
+    name: "xH2yzf",
     secret: "secretis",
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
+        secure: true, //when its https, the cookies wont show, on local host it breaks
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }

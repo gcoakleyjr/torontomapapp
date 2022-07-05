@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const cities = require('./cities');
 const Campground = require('../models/campground');
 const { places, descriptors } = require('./seedHelper');
+const users = require('./users')
+const toronto = require('./torontoLocations')
 
 mongoose.connect('mongodb://localhost:27017/map-app')
 
@@ -16,12 +18,12 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({})
-    for (let i = 0; i < 10; i++) {
-        const random1000 = Math.floor(Math.random() * 1000);
+    for (let i = 0; i < 15; i++) {
+        const random1000 = Math.floor(Math.random() * 11);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
-            author: "62c0984a7f2870edab1db936",
-            location: `${cities[random1000].city}, ${cities[random1000].state}`,
+            author: users[random1000],
+            location: toronto[i].address,
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
             price,
@@ -37,7 +39,7 @@ const seedDB = async () => {
             ],
             geometry: {
                 type: "Point",
-                coordinates: [-79.393757, 43.660737]
+                coordinates: [toronto[i].longitude, toronto[i].latitude]
             }
         })
         await camp.save()

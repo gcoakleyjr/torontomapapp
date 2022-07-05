@@ -10,6 +10,8 @@ ImageSchema.virtual("thumbnail").get(function () { //makes a method or property 
     return this.url.replace("/upload", "/upload/w_200")
 })
 
+const opts = { toJSON: { virtuals: true } }; // need thise for maps. Options for virtual to be converted to JSON when we pass it to javascript through script in our ejs
+
 const CampgroundSchema = new Schema({
     title: String,
     images: [ImageSchema],
@@ -37,6 +39,12 @@ const CampgroundSchema = new Schema({
             ref: "Review"
         }
     ]
+}, opts)
+
+CampgroundSchema.virtual("properties.popUpMarkup").get(function() { 
+    return  `
+    <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
+    <p>${this.description.substring(0, 30)}...</p>`
 })
 
 CampgroundSchema.post('findOneAndDelete', async function (doc) { //this allows us to delete all the reviews along with the campground. findOneAndDelete is a middleware that is called whenever you use mongoose findByIdandDelete and the post method is what happens ..post schema update i think

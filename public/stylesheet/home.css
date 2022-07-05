@@ -1,0 +1,116 @@
+/* body {
+    height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+    background-size: cover;
+    background-position: center;
+    text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+} */
+body {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    font-family: 'Raleway', sans-serif;
+}
+
+#home-page-wrapper {
+    position: absolute;
+    left: 50%;
+    width: 95vw;
+    transform: translateX(-50%);
+    overflow: hidden;
+    height: 95%;
+    border-bottom-left-radius: 3rem;
+    border-bottom-right-radius: 3rem;
+}
+
+#home-carousel {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.carousel-dark-overlay {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+}
+
+img {
+    transform: translateY(-30%);
+    opacity: 50%;
+}
+
+main,
+header {
+    z-index: 10;
+}
+
+
+.cover-container {
+    max-width: 90vw;
+}
+
+.nav-link {
+    padding: 0.25rem 0;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 1rem;
+    border-bottom: 0.1rem solid transparent;
+}
+
+.nav-link:hover {
+    color: rgba(255, 255, 255, 0.5);
+    border-bottom-color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-link.active {
+    color: white;
+    border-bottom-color: white;
+
+}
+
+.nav-box {
+    position: relative;
+    align-items: baseline;
+}
+
+.nav-box::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-bottom: .1rem solid white;
+    bottom: -30px;
+    width: 100%;
+}
+
+.btn-secondary,
+.btn-secondary:hover {
+    color: #333;
+    text-shadow: none;
+}
+
+.fs-6rem {
+    font-size: calc(3.4rem + 1.5vw);
+}
+
+.highlight {
+    position: relative;
+}
+
+.highlight::after {
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.7;
+    transform: scale(1.07, 1.05) skewX(-15deg);
+    background-image: linear-gradient(to top left, #e9e9e9, #bdbdbd);
+}

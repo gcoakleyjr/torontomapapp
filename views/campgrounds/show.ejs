@@ -72,12 +72,12 @@
             </div>
         </div>
 
-        <!-- REVIEWS -->
+        
         <div class="col-6">
-
             <!-- MAP -->
-            <div id='map' style='width: 636px; height: 200px;' class="mb-3"></div>
+            <div id='map' class="mb-3"></div>
 
+            <!-- REVIEWS -->
             <% if (currentUser) { %>
                 <h2>Leave a Review</h2>
                 <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form"
@@ -144,6 +144,6 @@
     </div>
 
     <script>
-        const campLocation = <%- JSON.stringify(campground.geometry.coordinates) %>
+        const campground = <%- JSON.stringify(campground) %>
     </script>
     <script src="/javascript/showPageMap.js"></script>

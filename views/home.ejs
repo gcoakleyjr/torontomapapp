@@ -1,3 +1,85 @@
-<% layout("layouts/boilerplate") %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <h1>HOME! MAP APP</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toronto Map App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;600;800&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheet/home.css">
+</head>
+
+<body class="d-flex text-center text-white bg-light">
+
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+
+        <!-- NAV BAR -->
+
+        <header class="mb-auto">
+            <div class="d-flex flex-row justify-content-between nav-box">
+                <h3 class="float-md-left mb-0 fw-semibold fs-1">mapTO</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-right">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="/campgrounds">Explore</a>
+                    <% if(!currentUser) { %>
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
+                        <% } else { %>
+                            <a class="nav-link" href="/logout">Logout</a>
+                            <% } %>
+                </nav>
+            </div>
+        </header>
+
+        <!-- SPLASH -->
+        <main class="px-3">
+            <h1 class="fw-semibold fs-6rem">Toronto events<br>for <span class="highlight">you</span><br>by <span
+                    class="highlight">you</span></h1>
+
+            <a href="/campgrounds" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
+                Map</a>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p>&copy; 2022 Giovanni Coakley </p>
+        </footer>
+    </div>
+
+    <!-- CAROUSEL -->
+    <div id="home-page-wrapper">
+        <div class="carousel-dark-overlay">
+            <div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active" data-bs-interval="7000">
+                        <img src="https://images.unsplash.com/photo-1591627442101-4adb28646678?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="7000">
+                        <img src="https://images.unsplash.com/photo-1628175176026-dbd7fb9c985a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
+                            class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item" data-bs-interval="7000">
+                        <img src="https://images.unsplash.com/photo-1583606784124-bc6a466207c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
+                            class="d-block w-100" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
+        integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
