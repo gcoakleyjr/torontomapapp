@@ -15,15 +15,16 @@ const passport = require("passport") //use for user login stuff install passport
 const localStrategy = require("passport-local")
 const User = require("./models/user") //our user login schema
 const mongoSanitize = require("express-mongo-sanitize") //makes sure someone doesnt try to pass bad querys
+const ExpressMongoSanitize = require('express-mongo-sanitize');
 //const helmet = require("helmet") //security
 
 
 
 // routes
-const campgrounds = require("./routes/campgrounds")
+const posts = require("./routes/posts")
 const reviews = require("./routes/reviews")
 const users = require("./routes/users");
-const ExpressMongoSanitize = require('express-mongo-sanitize');
+
 
 
 //connect mongoose
@@ -52,7 +53,7 @@ const sessionConfig = { //how you set up sessions, just do it
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        secure: true, //when its https, the cookies wont show, on local host it breaks
+        //secure: true, //when its https, the cookies wont show, on local host it breaks
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
@@ -74,9 +75,9 @@ app.use((req, res, next) => { //do this for flash to work on every template and 
 })
 
 
-//define campground route
-app.use("/campgrounds", campgrounds)
-app.use("/campgrounds/:id/reviews", reviews)
+//define post route
+app.use("/posts", posts)
+app.use("/posts/:id/reviews", reviews)
 app.use("/", users)
 
 

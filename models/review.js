@@ -6,7 +6,7 @@ const reviewSchema = new Schema({
     rating: Number,
     author: {
         type: Schema.Types.ObjectId,
-        ref: "User"  //ref refers to the model. so we have user, review and campground model. when we supply an Object ID, it refers to that model and then we we populate it, we get the actual data
+        ref: "User"  //ref refers to the model. so we have user, review and post model. when we supply an Object ID, it refers to that model and then we we populate it, we get the actual data
     }
 })
 

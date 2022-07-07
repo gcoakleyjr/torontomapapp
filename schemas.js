@@ -23,8 +23,8 @@ const extension = (joi) => ({
 
 const Joi = BaseJoi.extend(extension) //joi = normal job and that extesions we just wrote
 
-module.exports.campgroundSchema = Joi.object({
-    campground: Joi.object({ //campground because we grouped things under campground in our submit form
+module.exports.postSchema = Joi.object({
+    post: Joi.object({ //post because we grouped things under post in our submit form
         title: Joi.string().required().escapeHTML(),
         price: Joi.number().required().min(0),
         //image: Joi.string().required(),

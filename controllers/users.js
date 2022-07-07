@@ -12,8 +12,8 @@ module.exports.register = async (req, res) => {
         req.login(newUser, error => { //logs you in automatically after signing up
             if (error) return next(error);
 
-            req.flash("success", `Welcome to the MapApp, ${username}!`)
-            res.redirect("/campgrounds")
+            req.flash("success", `Welcome to the mapTO, ${username}!`)
+            res.redirect("/posts")
         })
     } catch (e) {
         req.flash("error", e.message)
@@ -27,7 +27,7 @@ module.exports.renderLogin = (req, res) => {
 
 module.exports.login = (req, res) => {  //local is .. just typing it in, vs login via twitter or something.
     req.flash("success", `Welcome back, ${req.body.username}!`)
-    const redirectUrl = req.session.returnTo || "/campgrounds"  //looks at sessions and see if there was a path we were going to before we were redirected to login
+    const redirectUrl = req.session.returnTo || "/posts"  //looks at sessions and see if there was a path we were going to before we were redirected to login
     delete req.session.returnTo
     res.redirect(redirectUrl)
 }
@@ -35,5 +35,5 @@ module.exports.login = (req, res) => {  //local is .. just typing it in, vs logi
 module.exports.logout = (req, res) => {
     req.logout()
     req.flash("success", "Later, nerd!")
-    res.redirect("/campgrounds")
+    res.redirect("/posts")
 }

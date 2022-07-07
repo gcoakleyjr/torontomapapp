@@ -7,7 +7,7 @@
             <div id="mapAppIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
 
-                    <% campground.images.forEach((img, i)=> { %>
+                    <% post.images.forEach((img, i)=> { %>
                         <button type="button" data-bs-target="#mapAppIndicators" data-bs-slide-to="<%= i %>"
                             class="<%= i === 0 ? " active" : "" %>" aria-label="Slide <%= i + 1 %>"></button>
                         <% }) %>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="carousel-inner">
 
-                    <% campground.images.forEach((img, i)=> { %>
+                    <% post.images.forEach((img, i)=> { %>
                         <div class="carousel-item <%= i === 0 ? " active" : "" %>">
                             <img src="<%= img.url %>" class="d-block w-100" alt="">
                         </div>
@@ -23,7 +23,7 @@
 
                 </div>
 
-                <% if(campground.images.length> 1) {%>
+                <% if(post.images.length> 1) {%>
                     <button class="carousel-control-prev" type="button" data-bs-target="#mapAppIndicators"
                         data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -41,26 +41,26 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title mb-0">
-                        <%= campground.title%>
+                        <%= post.title%>
                     </h5>
                     <p class="card-text text-muted fs-6">Posted by <a class="link-secondary" href="#">
-                            <%=campground.author.username%>
+                            <%=post.author.username%>
                         </a></p>
                     <p class="card-text">
-                        <%= campground.description%>
+                        <%= post.description%>
                     </p>
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item text-muted">
-                        <%= campground.location%>
+                        <%= post.location%>
                     </li>
-                    <li class="list-group-item">$<%= campground.price%>/night</li>
+                    <li class="list-group-item">$<%= post.price%>/night</li>
                 </ul>
 
-                <% if( currentUser && campground.author.equals(currentUser._id)) {%>
+                <% if( currentUser && post.author.equals(currentUser._id)) {%>
                     <div class="card-body">
-                        <a class="card-link btn btn-info" href="/campgrounds/<%=campground._id%>/edit">Edit</a>
-                        <form class="d-inline" action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                        <a class="card-link btn btn-info" href="/posts/<%=post._id%>/edit">Edit</a>
+                        <form class="d-inline" action="/posts/<%=post._id%>?_method=DELETE" method="POST">
                             <button class="btn btn-danger">Delete</button>
                         </form>
                     </div>
@@ -80,7 +80,7 @@
             <!-- REVIEWS -->
             <% if (currentUser) { %>
                 <h2>Leave a Review</h2>
-                <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="mb-3 validated-form"
+                <form action="/posts/<%=post._id%>/reviews" method="POST" class="mb-3 validated-form"
                     novalidate>
                     <!-- <div class="mb-3">
                         <label class="form-label" for="rating">Rating</label>
@@ -118,7 +118,7 @@
 
 
             <!-- REVIEW COMMENTS -->
-                    <% for(let review of campground.reviews) { %>
+                    <% for(let review of post.reviews) { %>
                         <div class="card mb-3 ">
                             <div class="card-body">
 
@@ -132,7 +132,7 @@
                                 </p>
                                 <% if( currentUser && review.author.equals(currentUser._id)) {%>
                                     <form
-                                        action="/campgrounds/<%=campground._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                        action="/posts/<%=post._id%>/reviews/<%=review._id%>?_method=DELETE"
                                         method="POST">
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </form>
@@ -144,6 +144,6 @@
     </div>
 
     <script>
-        const campground = <%- JSON.stringify(campground) %>
+        const post = <%- JSON.stringify(post) %>
     </script>
     <script src="/javascript/showPageMap.js"></script>

@@ -14,19 +14,18 @@
     <link rel="stylesheet" href="/stylesheet/home.css">
 </head>
 
-<body class="d-flex text-center text-white bg-light">
+<body class="d-flex text-white bg-light">
 
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <div class="cover-container d-flex h-100 w-100 p-3 pb-5 mx-auto flex-column">
 
         <!-- NAV BAR -->
-
         <header class="mb-auto">
             <div class="d-flex flex-row justify-content-between nav-box">
                 <h3 class="float-md-left mb-0 fw-semibold fs-1">mapTO</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-right">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    <a class="nav-link" href="/campgrounds">Explore</a>
+                    <a class="nav-link" href="/posts">Explore</a>
                     <% if(!currentUser) { %>
                         <a class="nav-link" href="/login">Login</a>
                         <a class="nav-link" href="/register">Register</a>
@@ -39,34 +38,42 @@
 
         <!-- SPLASH -->
         <main class="px-3">
-            <h1 class="fw-semibold fs-6rem">Toronto events<br>for <span class="highlight">you</span><br>by <span
-                    class="highlight">you</span></h1>
-
-            <a href="/campgrounds" class="btn btn-lg btn-secondary font-weight-bold border-white bg-white">View
-                Map</a>
+            <div class="title-container px-5">
+                <h1 class="fw-normal fs-6rem lh-1">
+                    <span class="title-text">Explore Toronto</span>
+                    <span class="title-text text-end">mapped out</span>
+                    <span class="title-text">for you, by you</span>
+                </h1>
+            </div>
         </main>
 
-        <footer class="mt-auto text-white-50">
-            <p>&copy; 2022 Giovanni Coakley </p>
+        <footer class="mt-auto text-white-50 mx-auto">
+            <p>&copy; Giovanni Coakley 2022</p>
         </footer>
+
     </div>
 
+
+    <div class="explore-btn-wrapper">
+        <a href="/posts" class="explore-btn"><span>View
+                Map</span> </a>
+    </div>
     <!-- CAROUSEL -->
     <div id="home-page-wrapper">
         <div class="carousel-dark-overlay">
             <div id="home-carousel" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active" data-bs-interval="7000">
-                        <img src="https://images.unsplash.com/photo-1591627442101-4adb28646678?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
-                            class="d-block w-100" alt="...">
+                        <img src="https://images.unsplash.com/photo-1474942172398-8d5de8c54e61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
+                            class="d-block" alt="...">
                     </div>
                     <div class="carousel-item" data-bs-interval="7000">
                         <img src="https://images.unsplash.com/photo-1628175176026-dbd7fb9c985a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
-                            class="d-block w-100" alt="...">
+                            class="d-block" alt="...">
                     </div>
                     <div class="carousel-item" data-bs-interval="7000">
                         <img src="https://images.unsplash.com/photo-1583606784124-bc6a466207c7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2000&q=80"
-                            class="d-block w-100" alt="...">
+                            class="d-block" alt="...">
                     </div>
                 </div>
             </div>

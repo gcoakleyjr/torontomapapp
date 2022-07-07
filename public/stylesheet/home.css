@@ -42,10 +42,12 @@ body {
 img {
     transform: translateY(-30%);
     opacity: 50%;
+    width: 100%;
 }
 
 main,
-header {
+header,
+footer {
     z-index: 10;
 }
 
@@ -53,6 +55,16 @@ header {
 .cover-container {
     max-width: 90vw;
 }
+
+.title-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.title-text {
+    display: block;
+}
+
 
 .nav-link {
     padding: 0.25rem 0;
@@ -94,7 +106,7 @@ header {
 }
 
 .fs-6rem {
-    font-size: calc(3.4rem + 1.5vw);
+    font-size: calc(4.2rem + 2vw);
 }
 
 .highlight {
@@ -113,4 +125,65 @@ header {
     opacity: 0.7;
     transform: scale(1.07, 1.05) skewX(-15deg);
     background-image: linear-gradient(to top left, #e9e9e9, #bdbdbd);
+}
+
+.explore-btn-wrapper {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    bottom: 13%;
+}
+
+.explore-btn {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 1px solid white;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: .5s;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.explore-btn span {
+    z-index: 10;
+    position: relative;
+    font-size: 1.5rem;
+}
+
+.explore-btn:hover {
+    color: black
+}
+
+.explore-btn::after {
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    background-color: white;
+    transform: translateY(100%);
+    transition: .5s;
+    border-radius: 50%;
+}
+
+.explore-btn:hover::after {
+    transform: translateY(0%);
+}
+
+@media screen and (max-width: 1080px) {
+    img {
+        width: 1050px !important;
+
+    }
 }

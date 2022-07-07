@@ -12,7 +12,7 @@ ImageSchema.virtual("thumbnail").get(function () { //makes a method or property 
 
 const opts = { toJSON: { virtuals: true } }; // need thise for maps. Options for virtual to be converted to JSON when we pass it to javascript through script in our ejs
 
-const CampgroundSchema = new Schema({
+const PostSchema = new Schema({
     title: String,
     images: [ImageSchema],
     geometry: {
@@ -31,7 +31,7 @@ const CampgroundSchema = new Schema({
     location: String,
     author: {
         type: Schema.Types.ObjectId,
-        ref: "User"  //ref refers to the model. so we have user, review and campground model. when we supply an Object ID, it refers to that model and then we we populate it, we get the actual data
+        ref: "User"  //ref refers to the model. so we have user, review and Post model. when we supply an Object ID, it refers to that model and then we we populate it, we get the actual data
     },
     reviews: [
         {
@@ -41,14 +41,14 @@ const CampgroundSchema = new Schema({
     ]
 }, opts)
 
-CampgroundSchema.virtual("properties.popUpMarkup").get(function() { 
+PostSchema.virtual("properties.popUpMarkup").get(function() { 
     return  `
-    <strong><a href="/campgrounds/${this._id}">${this.title}</a><strong>
+    <strong><a href="/posts/${this._id}">${this.title}</a><strong>
     <p>${this.description.substring(0, 30)}...</p>`
 })
 
-CampgroundSchema.post('findOneAndDelete', async function (doc) { //this allows us to delete all the reviews along with the campground. findOneAndDelete is a middleware that is called whenever you use mongoose findByIdandDelete and the post method is what happens ..post schema update i think
-    if (doc) { // doc is the campground we are deleting
+PostSchema.post('findOneAndDelete', async function (doc) { //this allows us to delete all the reviews along with the Post. findOneAndDelete is a middleware that is called whenever you use mongoose findByIdandDelete and the post method is what happens ..post schema update i think
+    if (doc) { // doc is the Post we are deleting
         await Review.deleteMany({
             _id: {
                 $in: doc.reviews //the in means, find all within this field 
@@ -57,4 +57,4 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) { //this allows u
     }
 })
 
-module.exports = mongoose.model("Campground", CampgroundSchema)
+module.exports = mongoose.model("Post", PostSchema)
