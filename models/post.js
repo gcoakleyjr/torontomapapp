@@ -6,11 +6,24 @@ const ImageSchema = new Schema({
     url: String,
     filename: String
 })
+
+
+const opts = { toJSON: { virtuals: true } }; // need thise for maps. Options for virtual to be converted to JSON when we pass it to javascript through script in our ejs
+
+
 ImageSchema.virtual("thumbnail").get(function () { //makes a method or property for a model
     return this.url.replace("/upload", "/upload/w_200")
 })
 
-const opts = { toJSON: { virtuals: true } }; // need thise for maps. Options for virtual to be converted to JSON when we pass it to javascript through script in our ejs
+ImageSchema.virtual("allPostsSize").get(function () { //makes a method or property for a model
+    return this.url.replace("/upload", "/upload/c_fill,h_500,w_500")
+})
+
+ImageSchema.virtual("showPostsSize").get(function () { //makes a method or property for a model
+    return this.url.replace("/upload", "/upload/c_fill,h_1500,w_1500")
+})
+
+
 
 const PostSchema = new Schema({
     title: String,
@@ -26,7 +39,6 @@ const PostSchema = new Schema({
             required: true
         }
     },
-    price: Number,
     description: String,
     location: String,
     author: {

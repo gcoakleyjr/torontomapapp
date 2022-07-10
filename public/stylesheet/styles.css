@@ -57,7 +57,7 @@ body {
 /* POST AND FILTER */
 
 .new-post-btn {
-    padding: 20px 30px;
+    padding: 15px 25px;
     border-radius: 1rem;
     border: 1px solid rgba(53,206,252,1);
     text-decoration: none;
@@ -165,7 +165,15 @@ body {
 
 .all-posts-arrow {
     width: 4vw;
-    color: rgba(173,109,248,1)
+    transition: .5s;
+}
+
+.all-posts-arrow:hover {
+    transform: translateY(10px);
+}
+
+.all-posts-btn:hover ~ .all-posts-arrow {
+    transform: translateY(10px)
 }
 
 
@@ -173,4 +181,66 @@ body {
 
 .infinite-scroll-container {
     padding: 7rem 0;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.all-posts-wrapper {
+    background-color: rgba(255, 255, 255, .02);
+    border-radius: 2rem;
+}
+
+.post-image-container {
+    overflow: hidden;
+}
+
+.post-image {
+    transform: scale(1.05);
+    transition: .5s;
+}
+
+.post-image:hover {
+    transform: scale(1.15);
+}
+
+.card {
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .07);
+    border: 1px solid rgba(255, 255, 255, .2);
+    color: white;
+    transition: .3s;
+}
+
+.card:hover {
+    border: 1px solid rgba(255, 255, 255, .6); 
+}
+
+.text-muted-c {
+    color: rgba(255, 255, 255, .5)
+}
+
+.view-post-btn {
+    cursor: pointer;
+    color: rgba(53,206,252,.8);
+    text-decoration: none;
+    transition: 0.3s;
+    position: absolute;
+    bottom: 10px;
+}
+
+.view-post-btn:hover {
+    color: rgba(53,206,252,1)
+}
+
+.clip-text {
+    width: 90%;
+    max-height: 110px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent)
+}
+
+.list-group-item {
+    background-color: transparent;
 }

@@ -26,8 +26,6 @@ const Joi = BaseJoi.extend(extension) //joi = normal job and that extesions we j
 module.exports.postSchema = Joi.object({
     post: Joi.object({ //post because we grouped things under post in our submit form
         title: Joi.string().required().escapeHTML(),
-        price: Joi.number().required().min(0),
-        //image: Joi.string().required(),
         location: Joi.string().required().escapeHTML(),
         description: Joi.string().required().escapeHTML()
     }).required(),

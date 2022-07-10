@@ -16,7 +16,7 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
 
     for (let i = 0; i < paginatedItems.length; i++) {
         let item = paginatedItems[i]
-        let postImage = `<div class="col-md-4"><img class="img-fluid" alt="" src="${item.images[0].url}"></div>`
+        let postImage = `<a href="/posts/${item._id}" class="col-md-4 post-image-container"><img class="img-fluid post-image" alt="" src="${item.images[0].url.replace("/upload", "/upload/c_fill,h_500,w_500")}"></a>`
 
         wrapper.innerHTML += `
         <div class="card mb-3" >
@@ -29,18 +29,18 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
                         <h5 class="card-title mb-0">
                             ${item.title}
                         </h5>
-                        <p class="card-text text-muted fs-6">Posted by <a class="link-secondary" href="#">
+                        <p class="card-text text-muted-c fs-6">Posted by <a class="link-secondary" href="#">
                                 ${item.author.username}
                             </a></p>
-                        <p class="card-text">
-                            <${item.description}
+                        <p class="card-text clip-text">
+                            ${item.description}
                         </p>
                         <p class="card-text">
-                            <small class="text-muted">
+                            <small class="text-muted-c">
                                 ${item.location}
                             </small>
                         </p>
-                        <a class="btn btn-primary" href="/posts/${item._id}">View
+                        <a class="view-post-btn" href="/posts/${item._id}">View
                             ${item.title}
                         </a>
                     </div>
@@ -53,6 +53,8 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
 
 function SetupPagination (items, wrapper, rowsPerPage) {
     wrapper.innerHTML = ""
+    let date = new Date()
+    console.log(date.toDateString())
 
     let pageCount = Math.ceil(items.length / rowsPerPage)
     for (let i = 1; i < pageCount + 1; i++) {
@@ -74,7 +76,6 @@ function PaginationButton (page, items) {
         DisplayList(items, list_element, rows, current_page)
 
         let currentBtn = document.querySelector(".pagination li.active")
-        console.log(currentBtn)
         currentBtn.classList.remove("active")
         button.classList.add("active")
     })

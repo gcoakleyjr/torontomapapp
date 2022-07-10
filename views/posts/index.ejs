@@ -5,15 +5,19 @@
     <main>
 
         <div class="vh-100">
+
+            <!-- MAP -->
             <div id="show-page-wrapper">
                 <div class="top-page-padding"></div>
                 <div id="cluster-map"></div>
             </div>
+
+            <!-- CREATE AND FILTER -->
             <div class="container mt-4 h-25">
                 <%- include("../partials/flash") %>
-                    <div class="filter-list d-flex flex-row justify-content-between mb-2">
-                        <h3 class="new-btn-glow"><a href="/posts/new" class="new-post-btn"><span
-                                    class="new-post-text">Create Post</span></a></h3>
+                    <div class="filter-list d-flex flex-row justify-content-between mb-3">
+                        <h4 class="new-btn-glow"><a href="/posts/new" class="new-post-btn"><span
+                                    class="new-post-text">Create Post</span></a></h4>
                         <div class="filter-wrapper d-flex flex-row justify-content-between w-75 text-light">
                             <h4>Filter</h4>
                             <div class="filter">
@@ -30,20 +34,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="all-posts-btn-wrapper d-flex flex-column align-items-center">
-                        <a href="#all-posts">
+
+            <!-- ALL POSTS -->
+                    <div class="all-posts-btn-wrapper d-flex  justify-content-center">
+                        <a href="#all-posts" class="d-flex flex-column align-items-center">
                             <h1 class="all-posts-btn">ALL POSTS</h1>
+                            <img class="all-posts-arrow" src="/images/arrow-01.svg" alt="">
                         </a>
-                        <a href="#all-posts"><img class="all-posts-arrow" src="/images/arrow-01.svg" alt=""></a>
                     </div>
             </div>
         </div>
 
-        <div class="container mt-5">
+        
+        <div class="container mt-5 all-posts-wrapper">
+
             <div class="infinite-scroll-container" id="all-posts">
             </div>
+
             <div>
-                <ul class="pagination" id="pagination">
+                <ul class="pagination d-flex justify-content-center pb-3" id="pagination">
                 </ul>
             </div>
         </div>
