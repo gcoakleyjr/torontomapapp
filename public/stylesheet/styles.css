@@ -262,3 +262,25 @@ body {
 .carousel-show-page-radius {
     border-radius: .5rem;
 }
+
+.font-small {
+    font-size: .8rem;
+}
+
+.highlight-btn {
+    transition: 0.3s;
+    background-color: transparent;
+    padding: 7px 0.5rem;
+    border-radius: 3px;
+    border: none
+}
+
+.highlight-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+textarea.form-control {
+    background-color: #262630;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, .6);
+}

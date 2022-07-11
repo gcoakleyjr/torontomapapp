@@ -54,7 +54,7 @@
                     <li class="list-group-item text-muted-c">
                         <%= post.location%>
                     </li>
-                    
+
                 </ul>
 
                 <% if( currentUser && post.author.equals(currentUser._id)) {%>
@@ -67,29 +67,24 @@
                     <% } %>
 
                         <div class="card-footer text-muted-c">
-                            <% if(post.daysFromCreation)  {%>
-                                Posted <%= post.daysFromCreation %> day<%= post.daysFromCreation === 1 ? "" : "s" %> ago
-                            <% } else { %> 
-                                Posted today
-                                <% } %> 
+                            <% if(post.daysFromCreation) {%>
+                                Posted <%= post.daysFromCreation %> day<%= post.daysFromCreation===1 ? "" : "s" %> ago
+                                        <% } else { %>
+                                            Posted today
+                                            <% } %>
                         </div>
             </div>
         </div>
 
-        
+
         <div class="col-6">
             <!-- MAP -->
             <div id='map' class="mb-3"></div>
 
             <!-- REVIEWS -->
             <% if (currentUser) { %>
-                
-                <form action="/posts/<%=post._id%>/reviews" method="POST" class="mb-3 validated-form"
-                    novalidate>
-                    <!-- <div class="mb-3">
-                        <label class="form-label" for="rating">Rating</label>
-                        <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
-                    </div> -->
+
+                <form action="/posts/<%=post._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
                     <div class="mb-3">
                         <label class="form-label font-white" for="body">Comment</label>
                         <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3"
@@ -103,31 +98,63 @@
                 <% } %>
 
 
-            <!-- REVIEW COMMENTS -->
+                    <!-- REVIEW COMMENTS -->
                     <% for(let review of post.reviews) { %>
                         <div class="card mb-3 font-white">
-                            <div class="card-body">
-                                <h6 class="card-subtitle mb-2 text-muted-c">By <a href="#" class="link-secondary">
+                            <div class="card-body pb-1">
+                                <h6 class="card-subtitle mb-2 text-muted-c px-2">By <a href="#" class="link-secondary">
                                         <%= review.author.username %>
                                     </a></h6>
-                                <p class="card-text"><%= review.body %>
+                                <p class="card-text px-2 mb-0">
+                                    <%= review.body %>
                                 </p>
+
+                                <% if( currentUser) {%>
+                                    <div class="accordion" id="accordionExample"></div>
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseOne" aria-expanded="true"
+                                                aria-controls="collapseOne">
+                                                <div class="mb-1 text-muted-c font-small highlight-btn">Reply</div>
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse collapse"
+                                            aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                            <div class="accordion-body px-2">
+
+                                                <form action="/posts/<%=post._id%>/replies" method="POST" class="mb-3 validated-form" novalidate>
+                                                    <div class="mb-3">
+                                                        <textarea class="form-control" name="replies[body]" id="body" cols="30" rows="3"
+                                                            required></textarea>
+                                                        <div class="valid-feedback">
+                                                            Looks good!
+                                                        </div>
+                                                    </div>
+                                                    <button class="text-muted-c font-small highlight-btn">Submit</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <% } %>
+
                                 <% if( currentUser && review.author.equals(currentUser._id)) {%>
-                                    <form
-                                        action="/posts/<%=post._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                    <form action="/posts/<%=post._id%>/reviews/<%=review._id%>?_method=DELETE"
                                         method="POST">
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </form>
                                     <% } %>
-                            </div>
                         </div>
-                        <% } %>
         </div>
+        <% } %>
+    </div>
     </div>
 
     <script>
-        
+
         const post = <%- JSON.stringify(post) %>
-        console.log(post)
+            console.log(post)
     </script>
     <script src="/javascript/showPageMap.js"></script>
