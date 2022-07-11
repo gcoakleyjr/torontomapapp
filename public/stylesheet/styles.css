@@ -207,7 +207,6 @@ body {
     overflow: hidden;
     background-color: rgba(255, 255, 255, .07);
     border: 1px solid rgba(255, 255, 255, .2);
-    color: white;
     transition: .3s;
 }
 
@@ -243,4 +242,23 @@ body {
 
 .list-group-item {
     background-color: transparent;
+}
+
+/* GENERAL */
+
+.btn-success {
+    cursor: pointer;
+    background-color: rgba(53,206,252,1);
+}
+
+.btn-success:hover {
+    background-color: rgb(57, 158, 189) 
+}
+
+.font-white {
+    color: white;
+}
+
+.carousel-show-page-radius {
+    border-radius: .5rem;
 }

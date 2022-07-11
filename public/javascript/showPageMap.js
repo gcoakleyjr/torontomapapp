@@ -4,6 +4,7 @@ const map = new mapboxgl.Map({
     style: 'mapbox://styles/gcoakleyjr/cl5bh92pf000y15jvazp1tb79', // style URL
     center: post.geometry.coordinates, // starting position [lng, lat]
     zoom: 11, // starting zoom
+    cooperativeGestures: true
 });
 
 new mapboxgl.Marker()

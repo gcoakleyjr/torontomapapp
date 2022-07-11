@@ -16,13 +16,13 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
 
     for (let i = 0; i < paginatedItems.length; i++) {
         let item = paginatedItems[i]
-        let postImage = `<a href="/posts/${item._id}" class="col-md-4 post-image-container"><img class="img-fluid post-image" alt="" src="${item.images[0].url.replace("/upload", "/upload/c_fill,h_500,w_500")}"></a>`
+        let postImage = `<a href="/posts/${item._id}" class="col-md-4 post-image-container"><img class="img-fluid post-image" alt="" src="${item.images[0] ? item.images[0].url.replace("/upload", "/upload/c_fill,h_500,w_500") : "https://res.cloudinary.com/dx1cp4cj9/image/upload/v1657490148/MapApp/defaultImg_tyaehu.jpg"}"></a>`
 
         wrapper.innerHTML += `
-        <div class="card mb-3" >
+        <div class="card mb-3 font-white" >
         <div class="row">
 
-            ${item.images.length ? postImage : ""}
+            ${postImage}
 
                 <div class="col-md-8">
                     <div class="card-body">
@@ -53,8 +53,6 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
 
 function SetupPagination (items, wrapper, rowsPerPage) {
     wrapper.innerHTML = ""
-    let date = new Date()
-    console.log(date.toDateString())
 
     let pageCount = Math.ceil(items.length / rowsPerPage)
     for (let i = 1; i < pageCount + 1; i++) {

@@ -8,20 +8,17 @@ const ImageSchema = new Schema({
 })
 
 
-const opts = { toJSON: { virtuals: true } }; // need thise for maps. Options for virtual to be converted to JSON when we pass it to javascript through script in our ejs
+const opts = { toJSON: { virtuals: true }, timestamps: true }; // need thise for maps. Options for virtual to be converted to JSON when we pass it to javascript through script in our ejs
 
 
 ImageSchema.virtual("thumbnail").get(function () { //makes a method or property for a model
     return this.url.replace("/upload", "/upload/w_200")
 })
 
-ImageSchema.virtual("allPostsSize").get(function () { //makes a method or property for a model
+ImageSchema.virtual("showPageUrl").get(function () { //makes a method or property for a model
     return this.url.replace("/upload", "/upload/c_fill,h_500,w_500")
 })
 
-ImageSchema.virtual("showPostsSize").get(function () { //makes a method or property for a model
-    return this.url.replace("/upload", "/upload/c_fill,h_1500,w_1500")
-})
 
 
 
@@ -39,6 +36,7 @@ const PostSchema = new Schema({
             required: true
         }
     },
+    likes: Number,
     description: String,
     location: String,
     author: {
@@ -57,6 +55,15 @@ PostSchema.virtual("properties.popUpMarkup").get(function() {
     return  `
     <strong><a href="/posts/${this._id}">${this.title}</a><strong>
     <p>${this.description.substring(0, 30)}...</p>`
+})
+
+PostSchema.virtual("daysFromCreation").get(function() { 
+    const createdDate = new Date(this.createdAt)  
+    const currentDate = new Date()
+    const oneDay = 1000 * 60 * 60 * 24
+
+    const diffInTime = currentDate.getTime() - createdDate.getTime()
+    return Math.round(diffInTime / oneDay)
 })
 
 PostSchema.post('findOneAndDelete', async function (doc) { //this allows us to delete all the reviews along with the Post. findOneAndDelete is a middleware that is called whenever you use mongoose findByIdandDelete and the post method is what happens ..post schema update i think
