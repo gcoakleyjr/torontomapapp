@@ -270,7 +270,7 @@ body {
 .highlight-btn {
     transition: 0.3s;
     background-color: transparent;
-    padding: 7px 0.5rem;
+    padding: 3px 0.5rem;
     border-radius: 3px;
     border: none
 }
@@ -283,4 +283,8 @@ textarea.form-control {
     background-color: #262630;
     color: white;
     border: 1px solid rgba(255, 255, 255, .6);
+}
+
+.h-12 {
+    height: 12.5%
 }

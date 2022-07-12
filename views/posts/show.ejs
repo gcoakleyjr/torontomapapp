@@ -105,12 +105,21 @@
                                 <h6 class="card-subtitle mb-2 text-muted-c px-2">By <a href="#" class="link-secondary">
                                         <%= review.author.username %>
                                     </a></h6>
-                                <p class="card-text px-2 mb-0">
+                                <p class="card-text px-2 mb-2">
                                     <%= review.body %>
                                 </p>
 
+                                <!-- DELETE -->
+                                <% if( currentUser && review.author.equals(currentUser._id)) {%>
+                                    <form action="/posts/<%=post._id%>/reviews/<%=review._id%>?_method=DELETE"
+                                        method="POST">
+                                        <button class="mb-1 text-muted-c font-small highlight-btn">Delete</button>
+                                    </form>
+                                    <% } %>
+
+                                <!-- REPLIES FORM -->
                                 <% if( currentUser) {%>
-                                    <div class="accordion" id="accordionExample"></div>
+                                    <!-- <div class="accordion" id="accordionExample"> -->
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
                                             <button class="accordion-button " type="button" data-bs-toggle="collapse"
@@ -123,38 +132,58 @@
                                             aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                             <div class="accordion-body px-2">
 
-                                                <form action="/posts/<%=post._id%>/replies" method="POST" class="mb-3 validated-form" novalidate>
+                                                <form action="/posts/<%=post._id%>/reviews/<%=review._id%>/replies" method="POST"
+                                                    class="mb-3 validated-form" novalidate>
                                                     <div class="mb-3">
-                                                        <textarea class="form-control" name="replies[body]" id="body" cols="30" rows="3"
-                                                            required></textarea>
+                                                        <textarea class="form-control" name="review[body]" id="body"
+                                                            cols="30" rows="3" required></textarea>
                                                         <div class="valid-feedback">
                                                             Looks good!
                                                         </div>
                                                     </div>
-                                                    <button class="text-muted-c font-small highlight-btn">Submit</button>
+                                                    <button
+                                                        class="text-muted-c font-small highlight-btn">Submit</button>
                                                 </form>
 
                                             </div>
                                         </div>
                                     </div>
-                            </div>
+                            <!-- </div> -->
                             <% } %>
 
-                                <% if( currentUser && review.author.equals(currentUser._id)) {%>
-                                    <form action="/posts/<%=post._id%>/reviews/<%=review._id%>?_method=DELETE"
-                                        method="POST">
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </form>
-                                    <% } %>
+                                
                         </div>
+
+                        <!-- REPLIES -->
+                        <% for(let reply of review.replies) { %>
+                            <div class="card mb-3 mx-5 font-white">
+                                <div class="card-body pb-1">
+                                    <h6 class="card-subtitle mb-2 text-muted-c px-2">By <a href="#" class="link-secondary">
+                                        <%= reply.author.username %>
+                                        </a></h6>
+                                    <p class="card-text px-2 mb-2">
+                                        <%= reply.body %>
+                                    </p>
+                                    <% if( currentUser && reply.author.equals(currentUser._id)) {%>
+                                        <form action="/posts/<%=post._id%>/reviews/<%=review._id%>/replies/<%= reply._id %>?_method=DELETE"
+                                            method="POST">
+                                            <button class="mb-1 text-muted-c font-small highlight-btn">Delete</button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                
+                                
+                
+                            </div>
+                        <% } %>
         </div>
+        
         <% } %>
-    </div>
     </div>
 
     <script>
 
         const post = <%- JSON.stringify(post) %>
-            console.log(post)
+            
     </script>
     <script src="/javascript/showPageMap.js"></script>

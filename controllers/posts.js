@@ -43,11 +43,20 @@ module.exports.createPost = async (req, res, next) => {
 
 module.exports.showPost = async (req, res,) => {
     const post = await Post.findById(req.params.id).populate({  //we populate the post with reviews and author, but each review also has an author, so an object and path populates the reviews author too
-        path: "reviews",
-        populate: {
-            path: "author"
-        }
-    }).populate("author")
+            path: "reviews",
+            populate: [{
+                path: "author",
+                select: ["username"]
+            },{
+                path: "replies",
+                populate: {
+                    path: "author",
+                    select: ["username"]
+                }
+            }]
+        }).populate("author")
+
+    console.log(post.reviews)
 
     if (!post) {
         req.flash("error", "Can't find that post :(")

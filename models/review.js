@@ -14,4 +14,16 @@ const reviewSchema = new Schema({
     }]
 })
 
-module.exports = mongoose.model("Review", reviewSchema)
+const Review = mongoose.model("Review", reviewSchema)
+
+reviewSchema.post('findOneAndDelete', async function (doc) { //this allows us to delete all the reviews along with the Post. findOneAndDelete is a middleware that is called whenever you use mongoose findByIdandDelete and the post method is what happens ..post schema update i think
+    if (doc) { // doc is the Post we are deleting
+        await Review.deleteMany({
+            _id: {
+                $in: doc.reviews //the in means, find all within this field 
+            }
+        })
+    }
+})
+
+module.exports = Review
