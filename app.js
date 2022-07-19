@@ -18,7 +18,13 @@ const mongoSanitize = require("express-mongo-sanitize") //makes sure someone doe
 const ExpressMongoSanitize = require('express-mongo-sanitize');
 //const helmet = require("helmet") //security
 
-
+// TODO
+//     ADD TRENDING
+//     ADD NEARBY POSTS
+//     FOOTER
+//     LIKES
+//     LINK ADDRESS TO MAPS
+//     LOCATION FROM GPS
 
 // routes
 const posts = require("./routes/posts")

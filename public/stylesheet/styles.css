@@ -169,11 +169,11 @@ body {
 }
 
 .all-posts-arrow:hover {
-    transform: translateY(10px);
+    transform: translateY(6px);
 }
 
 .all-posts-btn:hover ~ .all-posts-arrow {
-    transform: translateY(10px)
+    transform: translateY(6px)
 }
 
 
@@ -242,6 +242,23 @@ body {
 
 .list-group-item {
     background-color: transparent;
+    border: 0.1px solid #ffffff29;
+}
+
+
+/* SHOW PAGE */
+
+.show-map-wrapper {
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.upvote-btn {
+    width: 33px;
+    margin-right: .7rem;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
 }
 
 /* GENERAL */
@@ -287,4 +304,22 @@ textarea.form-control {
 
 .h-12 {
     height: 12.5%
+}
+
+.img-container {
+    overflow: hidden;
+}
+
+.register-img {
+    max-width: 125%
+}
+
+.alert {
+    padding-bottom: .4rem;
+    padding-top: .4rem;
+    padding-left: 1rem;
+}
+
+.alert-dismissible .btn-close {
+    padding: 0.7rem 1rem;
 }

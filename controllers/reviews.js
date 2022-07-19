@@ -8,7 +8,7 @@ module.exports.createReview = async (req, res, next) => {
     post.reviews.unshift(review)
     await review.save()
     await post.save()
-    req.flash("success", "Created new review!")
+    req.flash("success", "Posted new comment!")
     res.redirect(`/posts/${post._id}`)
 }
 

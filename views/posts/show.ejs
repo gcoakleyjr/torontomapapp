@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-6">
             <!-- Carousel -->
-            <div id="mapAppIndicators" class="carousel slide" data-bs-ride="true">
+            <div id="mapAppIndicators" class="carousel slide mb-3" data-bs-ride="true">
                 <div class="carousel-indicators">
 
                     <% post.images.forEach((img, i)=> { %>
@@ -37,50 +37,58 @@
                     <% } %>
             </div>
 
-            <!-- DESCRIPTION -->
-            <div class="card mb-3 font-white">
-                <div class="card-body">
-                    <h5 class="card-title mb-0">
-                        <%= post.title%>
-                    </h5>
-                    <p class="card-text text-muted-c fs-6">Posted by <a class="link-secondary" href="#">
-                            <%=post.author.username%>
-                        </a></p>
-                    <p class="card-text">
-                        <%= post.description%>
-                    </p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item text-muted-c">
-                        <%= post.location%>
-                    </li>
-
-                </ul>
-
-                <% if( currentUser && post.author.equals(currentUser._id)) {%>
-                    <div class="card-body">
-                        <a class="card-link btn btn-info" href="/posts/<%=post._id%>/edit">Edit</a>
-                        <form class="d-inline" action="/posts/<%=post._id%>?_method=DELETE" method="POST">
-                            <button class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
-                    <% } %>
-
-                        <div class="card-footer text-muted-c">
-                            <% if(post.daysFromCreation) {%>
-                                Posted <%= post.daysFromCreation %> day<%= post.daysFromCreation===1 ? "" : "s" %> ago
-                                        <% } else { %>
-                                            Posted today
-                                            <% } %>
-                        </div>
+            <!-- MAP -->
+            <div class="show-map-wrapper mb-3">
+                <div id='map' class=""></div>
             </div>
+            
         </div>
 
 
         <div class="col-6">
-            <!-- MAP -->
-            <div id='map' class="mb-3"></div>
+            
+<!-- DESCRIPTION -->
+        <div class="card mb-3 font-white">
+            <div class="card-body">
+                <h5 class="card-title mb-0">
+                    <%= post.title%>
+                </h5>
+                <p class="card-text text-muted-c fs-6">Posted by <a class="link-secondary" href="#">
+                        <%=post.author.username%>
+                    </a></p>
+                <p class="card-text">
+                    <%= post.description%>
+                </p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted-c">
+                    <%= post.location%>
+                </li>
+                <li class="list-group-item text-muted-c d-flex flex-row align-items-center">
+                    <form action="/posts/<%=post._id%>/likes" method="POST">
+                        <button class="upvote-btn"><img  src="/images/upvote.svg" alt=""></button>
+                    </form>
+                    <span><%= post.likes%> likes</span>
+                </li>
+            </ul>
 
+            <% if( currentUser && post.author.equals(currentUser._id)) {%>
+                <div class="card-body">
+                    <a class="card-link btn btn-info" href="/posts/<%=post._id%>/edit">Edit</a>
+                    <form class="d-inline" action="/posts/<%=post._id%>?_method=DELETE" method="POST">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+                <% } %>
+
+                    <div class="card-footer text-muted-c">
+                        <% if(post.daysFromCreation) {%>
+                            Posted <%= post.daysFromCreation %> day<%= post.daysFromCreation===1 ? "" : "s" %> ago
+                                    <% } else { %>
+                                        Posted today
+                                        <% } %>
+                    </div>
+        </div>
             <!-- REVIEWS -->
             <% if (currentUser) { %>
 
