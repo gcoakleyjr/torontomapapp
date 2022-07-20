@@ -56,14 +56,30 @@ module.exports.showPost = async (req, res,) => {
             }]
         }).populate("author")
 
-    console.log(post.reviews)
-
     if (!post) {
         req.flash("error", "Can't find that post :(")
         return res.redirect("/posts")
     }
     res.render('posts/show', { post });
 }
+
+/****
+ * LIKE post *
+ *****/
+ module.exports.likePost = async (req, res,) => {
+    const { id } = req.params
+    const post = await Post.findById(id)
+
+    if (post.likedBy.includes(req.user._id)) {
+        await Post.findByIdAndUpdate(id, {$pull: { likedBy: req.user._id }})      
+    } else {
+        post.likedBy.push(req.user._id)   
+        await post.save()
+    }
+    
+    res.redirect(`/posts/${id}`)
+
+ }
 
 /****
  * EDIT post *

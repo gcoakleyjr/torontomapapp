@@ -15,10 +15,14 @@ router.route('/')
 
 router.get('/new', isLoggedIn, posts.renderNewForm)
 
+
+
 router.route('/:id')
     .get(catchAsync(posts.showPost))
     .put(isLoggedIn, isAuthor, upload.array('image'), validatePost, catchAsync(posts.updatePost))
     .delete(isLoggedIn, isAuthor, catchAsync(posts.deletePost));
+
+router.post('/:id/like', catchAsync(posts.likePost))
 
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(posts.renderEditForm))
 

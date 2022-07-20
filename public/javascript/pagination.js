@@ -17,6 +17,8 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
     for (let i = 0; i < paginatedItems.length; i++) {
         let item = paginatedItems[i]
         let postImage = `<a href="/posts/${item._id}" class="col-md-4 post-image-container"><img class="img-fluid post-image" alt="" src="${item.images[0] ? item.images[0].url.replace("/upload", "/upload/c_fill,h_500,w_500") : "https://res.cloudinary.com/dx1cp4cj9/image/upload/v1657490148/MapApp/defaultImg_tyaehu.jpg"}"></a>`
+        let dateText = item.daysFromCreation === 0 ? "Posted today" : item.daysFromCreation === 1 ? "Posted 1 day ago" : `Posted ${item.daysFromCreation} days ago`
+        let likes = item.likedBy.length === 1 ? "1 like" : `${item.likedBy.length} likes`
 
         wrapper.innerHTML += `
         <div class="card mb-3 font-white" >
@@ -26,9 +28,11 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
 
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title mb-0">
-                            ${item.title}
-                        </h5>
+                        <a class="index-post-title" href="/posts/${item._id}">
+                            <h5 class="card-title mb-0">
+                                ${item.title}
+                            </h5>
+                        </a>
                         <p class="card-text text-muted-c fs-6">Posted by <a class="link-secondary" href="#">
                                 ${item.author.username}
                             </a></p>
@@ -40,9 +44,10 @@ function DisplayList(items, wrapper, rowsPerPage, page) {
                                 ${item.location}
                             </small>
                         </p>
-                        <a class="view-post-btn" href="/posts/${item._id}">View
-                            ${item.title}
-                        </a>
+                        <p class="text-muted-c post-info mb-0">
+                             <small class="post-date">${dateText}</small>
+                             <small><img class="upvote-btn-index" src="/images/upvote-index.svg">${likes}</small>       
+                        </p>
                     </div>
                 </div>
         </div>

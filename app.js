@@ -22,9 +22,10 @@ const ExpressMongoSanitize = require('express-mongo-sanitize');
 //     ADD TRENDING
 //     ADD NEARBY POSTS
 //     FOOTER
-//     LIKES
 //     LINK ADDRESS TO MAPS
 //     LOCATION FROM GPS
+//     SORTING
+//     FILTERS
 
 // routes
 const posts = require("./routes/posts")
@@ -91,6 +92,7 @@ app.use("/", users)
 app.get('/', (req, res) => {
     res.render('home')
 });
+
 
 
 //Error handling

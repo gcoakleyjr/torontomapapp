@@ -177,7 +177,7 @@ body {
 }
 
 
-/* POSTSSS */
+/* ALL POSTSSS */
 
 .infinite-scroll-container {
     padding: 7rem 0;
@@ -218,17 +218,21 @@ body {
     color: rgba(255, 255, 255, .5)
 }
 
-.view-post-btn {
-    cursor: pointer;
-    color: rgba(53,206,252,.8);
-    text-decoration: none;
-    transition: 0.3s;
+.post-info {
     position: absolute;
     bottom: 10px;
 }
 
-.view-post-btn:hover {
-    color: rgba(53,206,252,1)
+.post-date {
+    margin-right: 1rem;
+}
+
+.upvote-btn-index {
+    width: 15px;
+    margin-right: .5rem;
+    border: none;
+    background-color: transparent;
+    transform: translateY(-2px);
 }
 
 .clip-text {
@@ -245,6 +249,15 @@ body {
     border: 0.1px solid #ffffff29;
 }
 
+.index-post-title {
+    color: white;
+    text-decoration: none;
+    transition: 0.5s;
+}
+
+.index-post-title:hover {
+    color: rgba(53,206,252,1)
+}
 
 /* SHOW PAGE */
 
@@ -254,11 +267,12 @@ body {
 }
 
 .upvote-btn {
-    width: 33px;
-    margin-right: .7rem;
+    width: 22px;
+    margin-right: .5rem;
     cursor: pointer;
     border: none;
     background-color: transparent;
+    transform: translateY(-2px);
 }
 
 /* GENERAL */

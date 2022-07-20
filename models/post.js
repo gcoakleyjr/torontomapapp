@@ -36,10 +36,6 @@ const PostSchema = new Schema({
             required: true
         }
     },
-    likes: {
-        type: Number,
-        default: 0
-    },
     likedBy: [{
         type: Schema.Types.ObjectId,
         ref: "User"
@@ -65,7 +61,7 @@ PostSchema.virtual("properties.popUpMarkup").get(function() {
 })
 
 PostSchema.virtual("daysFromCreation").get(function() { 
-    const createdDate = new Date(this.createdAt)  
+    const createdDate = new Date(this.createdAt)
     const currentDate = new Date()
     const oneDay = 1000 * 60 * 60 * 24
 

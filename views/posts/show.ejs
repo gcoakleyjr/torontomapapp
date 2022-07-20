@@ -65,10 +65,12 @@
                     <%= post.location%>
                 </li>
                 <li class="list-group-item text-muted-c d-flex flex-row align-items-center">
-                    <form action="/posts/<%=post._id%>/likes" method="POST">
-                        <button class="upvote-btn"><img  src="/images/upvote.svg" alt=""></button>
+                    <% if( currentUser ) {%>
+                    <form action="/posts/<%=post._id%>/like" method="POST">
+                        <button class="upvote-btn p-0"><img  src=<%= post.likedBy.includes(currentUser._id) ? "/images/upvote-filled.svg" : "/images/upvote.svg" %> alt=""></button>
                     </form>
-                    <span><%= post.likes%> likes</span>
+                    <% } %>
+                    <span><%= post.likedBy.length%> like<%= post.likedBy.length===1 ? "" : "s" %></span>
                 </li>
             </ul>
 

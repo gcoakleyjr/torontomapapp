@@ -20,7 +20,7 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {
     await Post.deleteMany({})
     for (let i = 0; i < 15; i++) {
-        const random1000 = Math.floor(Math.random() * 11);
+        const random1000 = Math.floor(Math.random() * 15);
         const randomImage1 = Math.floor(Math.random() * 60)
         const randomImage2 = Math.floor(Math.random() * 60)
         const post = new Post({
